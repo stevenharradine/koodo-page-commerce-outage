@@ -1,0 +1,49 @@
+@import "colors";
+@import "fonts";
+@import "standardize";
+@import "override";
+
+.km-outage {
+	text-align: center;
+
+	p.large-text { margin: 0 auto; }
+
+	// colors
+	.lang-en {
+		background-color: $kRaspberry;
+		color: $kLightLime;
+	}
+	
+	.lang-fr {
+		background-color: $kLightTangerine;
+		color: $kRaspberry;
+	}
+}
+
+// default to hiding the videos on mobile
+.outage-video { display: none; }
+
+.copy-block {
+	padding: 40px 20px;
+
+	p:nth-of-type(2) { // middle paragraph
+		max-width: 360px;
+		padding: 25px 0 15px 0;
+		margin: 0 auto;
+	}
+}
+
+.large-text {
+	max-width: 420px;
+	@extend .stag-sans-bold-web;
+	font-size: 20px;
+
+	span { display: block; }
+}
+
+.small-text {
+	@extend .stag-sans-semibold-web;
+	font-size: 14px;
+}
+
+@import "media-query";

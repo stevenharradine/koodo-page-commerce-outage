@@ -1,0 +1,54 @@
+//- filepath: /sites/default/files/uploads/outage/filename.filetype
+
+doctype html
+html(lang="en")
+	head
+		title km.com/outage
+		//- START of local webserver CSS resources
+		link(rel="icon", type="image/png", href="http://localhost:4000/public/icons/koodo-blueberry-favicon-196-196.png")
+		link(rel="stylesheet" href="http://localhost:4000/public/font-stag-sans-web/stag-sans-web.css")
+		link(rel="stylesheet" href="http://localhost:4000/public/font-kooding-glyphs/kooding-glyphs.css")
+		link(rel="stylesheet" href="http://localhost:4000/public/styles/window-dimensions-helper.css")
+		//- END of local webserver CSS resources
+		link(rel="stylesheet" href="styles/main.css")
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		style.
+			/* project-specific local-only styles go here */
+			body { margin: 0; background-color: #8cd9ed; }
+
+			#ptHelper { background-color: #8cd9ed; }
+				#ptHelper h2 { max-width: 1160px; padding: 20px; margin: 0 auto; font-family: "Stag Sans Web"; font-size: 21px; font-weight: 700; }
+					#ptHelper h2:after { content: ""; margin-top: 10px; display: block; font-family: "Consolas", monospace; font-size: 18px; }
+						@media screen and (min-width: 0px) { #ptHelper h2:after { content: "Mobile view: 0-767px"; } }
+						@media screen and (min-width: 768px) { #ptHelper h2:after { content: "Tablet view: 768-1099px"; } }
+						@media screen and (min-width: 1100px) { #ptHelper h2:after { content: "Desktop view: > 1100px"; } }
+						/* @media screen and (min-width: 1200px) { #ptHelper h2 { padding: 20px 0; } */
+
+			#site-container { max-width: 1160px; margin: 0 auto; }
+	body
+		div#site-wrapper.page-content <!-- markup to mirror production page structure -->
+			div#ptHelper <!-- markup to mirror production page structure -->
+				h2 System Update
+			div#site-container <!-- markup to mirror production page structure -->
+				div#site-content <!-- markup to mirror production page structure -->
+					div.content <!-- markup to mirror production page structure -->
+						main.km-outage(role="main")
+							section.language-block.lang-en
+								video.outage-video.paddle(autoplay loop muted)
+								div.copy-block
+									p.large-text #[span Dear interwebs,] You’re a bit early to the party. We’re tweaking our website right now. But we promise it’ll be back up soon.
+									p.small-text You can still log into #[a(href="https://koodomobile.com/selfserve") Self Serve] to access your account.
+									p.small-text Got a Q? Find the A in #[a(href="http://help.koodomobile.com") Help] or in our #[a(href="https://community.koodomobile.com/koodo") Community].
+							section.language-block.lang-fr
+								div.copy-block
+									p.large-text #[span Chers internautes,] Vous arrivez un peu tôt. Nous réglons actuellement les derniers détails. Nous serons bientôt en ligne, c’est promis.
+									p.small-text En attendant, vous pouvez ouvrir une session dans votre compte #[a(href="https://koodomobile.com/selfserve") Libre-service] Koodo.
+									p.small-text Une question? Consultez #[a(href="http://aide.koodomobile.com") l’Aide] ou la #[a(href="https://communaute.koodomobile.com/koodofr") Communauté].
+								video.outage-video.drums(autoplay loop muted)
+						<!-- /.km-outage -->
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+		//- START of local webserver JS resources
+		script(src="http://localhost:4000/public/scripts/window-dimensions-helper.js")
+		//- END of local webserver JS resources
+		script(src="scripts/main.js")
