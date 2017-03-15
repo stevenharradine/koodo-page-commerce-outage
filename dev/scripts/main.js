@@ -4,9 +4,10 @@ const kmOutage = {
 	devEnvironment: false,
 	videosLoaded: false,
 
-	// shorthand helper methods for querySelector and querySelectorAll functions
-	dqs: (query) => { return document.querySelector(query); },
-	dqsa: (query) => { return document.querySelectorAll(query); }
+	// shorthand helper methods that implicitly return
+	// the querySelector and querySelectorAll methods
+	dqs: (query) => document.querySelector(query),
+	dqsa: (query) => document.querySelectorAll(query)
 };
 
 kmOutage.init = () => {
