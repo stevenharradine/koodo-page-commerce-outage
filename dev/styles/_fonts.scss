@@ -9,3 +9,13 @@
 
 .stag-sans-semibold-web { font-weight: 600; }
 .stag-sans-bold-web { font-weight: 700; }
+
+.kooding-glyph {
+	// "koodo_glyphsregular" for localhost, "koodings" for production
+	font-family: "koodo_glyphsregular", "koodings";
+	font-stretch: normal;
+	font-style: normal;
+	font-weight: normal;
+}
+
+.kooding-glyph.circular-arrow-right:before { content: "\E002"; } // &#57346;
