@@ -11,8 +11,9 @@ const gulp = require("gulp"),
 		sourcemaps = require("gulp-sourcemaps"), // build tool - creates sourcemaps for source file
 		browsersync = require("browser-sync"); // build tool - synchronize view/scroll states in multiple browsers
 
-// default tasks to run on "gulp" command
-gulp.task("default",
+// default task
+// array of tasks to run on "gulp" command
+gulp.task("default", 
 	[
 		"markup",
 		"style",
@@ -20,21 +21,21 @@ gulp.task("default",
 		"sync",
 		"watch"
 	],
-	() => {
-		gulp.src("").pipe(notify({message: "Default tasks completed."}));
-	}
+	() => gulp.src("").pipe(notify({message: "Default tasks completed."}))
 );
 
 // markup task
 // 1) source: all Pug from dev/ pipes into...
-// 2) pug: converts Pug to compressed/minified HTML, then pipes into...
-// 3) inline: converts image SVGs to inline SVGs, then pipes into...
-// 4) destination: public/ which then pipes into...
-// 5) browsersync: reload the page with the updated markup
+// 2) plumber: prevents gulp pipe from stopping on error and calls notify if an error is found
+// 3) notify: shows tray notification listing error message and line number, then pipes into...
+// 4) pug: converts Pug to HTML, then pipes into...
+// 5) inline: converts image SVGs to inline SVGs, then pipes into...
+// 6) destination: public/ which then pipes into...
+// 7) browsersync: reload the page with the updated markup
 gulp.task("markup", () => {
 	return gulp.src("dev/**/*.pug")
 		.pipe(plumber({
-			errorHandler: notify.onError("Markup Error: <%= error.message %>")
+			errorHandler: notify.onError("MARKUP ERROR: <%= error.message %>")
 		}))
 		.pipe(pug({
 			pretty: "\t" // output prettified HTML with tab indentation
@@ -55,14 +56,14 @@ gulp.task("markup", () => {
 // 4) sourcemaps: initializes sourcemaps for source file, then pipes into...
 // 5) sass: converts SCSS to compressed/minified CSS
 // 6) if sass finds a syntax error it logs it in the terminal, then pipes into...
-// 7) autoprefixer: adds in vendor prefixes, then pipes into...
+// 7) autoprefixer: adds vendor prefixes, then pipes into...
 // 8) sourcemaps: writes sourcemaps for source file, then pipes into...
 // 9) destination: public/styles/ which then pipes into...
 // 10) browsersync: injects CSS into the browser without full page reload
 gulp.task("style", () => {
 	return gulp.src("dev/styles/*.scss")
 		.pipe(plumber({
-			errorHandler: notify.onError("Style Error: <%= error.message %>")
+			errorHandler: notify.onError("STYLE ERROR: <%= error.message %>")
 		}))
 		.pipe(sourcemaps.init())
 		.pipe(sass({outputStyle: "compressed"})
@@ -76,7 +77,7 @@ gulp.task("style", () => {
 		.pipe(browsersync.stream({match: "**/*.css"}));
 });
 
-// script task
+// script Task
 // 1) source: all JS from dev/scripts/ pipes into...
 // 2) plumber: prevents gulp pipe from stopping on error and calls notify if an error is found
 // 3) notify: shows tray notification listing error message and line number, then pipes into...
@@ -88,7 +89,7 @@ gulp.task("style", () => {
 gulp.task("script", () => {
 	return gulp.src("dev/scripts/*.js")
 		.pipe(plumber({
-			errorHandler: notify.onError("Script Error: <%= error.message %>")
+			errorHandler: notify.onError("SCRIPT ERROR: <%= error.message %>")
 		}))
 		.pipe(sourcemaps.init())
 		.pipe(babel({
@@ -102,13 +103,11 @@ gulp.task("script", () => {
 });
 
 // sync task
-// 1) initialize browsersync
-// 2) browser(s) in which to open HTML document
-// 3) serve files from public/
+// browsersync configuration options
 gulp.task("sync", () => {
 	browsersync.init({
-		// browser: ["chrome", "firefox", "iexplore"],
-		browser: ["chrome"],
+		browser: ["chrome", "firefox", "iexplore"],
+		port: 3000,
 		server: {
 			baseDir: "public/",
 			index: "index-en-fr.html"
@@ -117,8 +116,8 @@ gulp.task("sync", () => {
 });
 
 // watch task
+// files to watch and tasks to run
 gulp.task("watch", () => {
-	// files to watch and tasks to run
 	gulp.watch("dev/**/*.pug", ["markup"]);
 	gulp.watch("dev/styles/*.scss", ["style"]);
 	gulp.watch("dev/scripts/*.js", ["script"]);
