@@ -4,26 +4,19 @@ doctype html
 html(lang="en")
 	head
 		title km.com/outage
-		//- START of local webserver CSS resources
+		// START of local webserver CSS resources
 		link(rel="icon", type="image/png", href="http://localhost:4000/public/icons/koodo-blueberry-favicon-196-196.png")
 		link(rel="stylesheet" href="http://localhost:4000/public/font-stag-sans-web/stag-sans-web.css")
 		link(rel="stylesheet" href="http://localhost:4000/public/font-kooding-glyphs/kooding-glyphs.css")
+		link(rel="stylesheet" href="http://localhost:4000/public/styles/page-title-helper.css")
 		link(rel="stylesheet" href="http://localhost:4000/public/styles/window-dimensions-helper.css")
-		//- END of local webserver CSS resources
+		// END of local webserver CSS resources
 		link(rel="stylesheet" href="styles/main.css")
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		style.
 			/* project-specific local-only styles go here */
 			body { margin: 0; background-color: #8cd9ed; }
-
-			#ptHelper { background-color: #8cd9ed; }
-				#ptHelper h2 { max-width: 1160px; padding: 20px; margin: 0 auto; font-family: "Stag Sans Web"; font-size: 21px; font-weight: 700; }
-					#ptHelper h2:after { content: ""; margin-top: 10px; display: block; font-family: "Consolas", monospace; font-size: 18px; }
-						@media screen and (min-width: 0px) { #ptHelper h2:after { content: "Mobile view: 0-767px"; } }
-						@media screen and (min-width: 768px) { #ptHelper h2:after { content: "Tablet view: 768-1099px"; } }
-						@media screen and (min-width: 1100px) { #ptHelper h2:after { content: "Desktop view: > 1100px"; } }
-						/* @media screen and (min-width: 1200px) { #ptHelper h2 { padding: 20px 0; } */
 
 			#site-container { max-width: 1160px; margin: 0 auto; }
 	body
@@ -48,7 +41,10 @@ html(lang="en")
 								video.outage-video.drums(autoplay loop muted)
 						<!-- /.km-outage -->
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
-		//- START of local webserver JS resources
+		// START of local webserver JS resources
+		//- page-title-helper.js adds "View French" and "View English" links to page
+		//- script removed b/c this page is bilingual (i.e. EN and FR code is the same)
+		//- script(src="http://localhost:4000/public/scripts/page-title-helper.js")
 		script(src="http://localhost:4000/public/scripts/window-dimensions-helper.js")
-		//- END of local webserver JS resources
+		// END of local webserver JS resources
 		script(src="scripts/main.js")
